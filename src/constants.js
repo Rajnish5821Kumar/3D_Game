@@ -1,0 +1,9 @@
+export const ROUND_SECONDS = 90;
+export const SHARD_TOTAL = 10;
+export const MAX_LIVES = 3;
+export const ARENA_RADIUS = 29;
+export const PLAYER_SPEED = 13;
+export const DASH_SPEED = 29;
+export const DASH_DURATION = 0.22;
+export const DASH_COOLDOWN = 1.15;
+export const PLAYER_RADIUS = 0.62;
