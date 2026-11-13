@@ -23,6 +23,7 @@ npm run preview
 
 - **W A S D** or **arrow keys** to move.
 - **Space** to dash. A dash recharges after a short cooldown.
+- Follow the compass to the nearest light; once you have all ten, follow it home.
 - On touch screens, use the on-screen arrows and dash button.
 - Collect all ten light shards, then return to the glowing beacon at the center.
 - A shard at every fifth pickup gives you five bonus seconds.

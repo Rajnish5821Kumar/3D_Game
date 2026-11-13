@@ -298,6 +298,36 @@ button {
   min-width: 116px;
 }
 
+.compass-card {
+  min-width: 127px;
+  gap: 5px;
+}
+
+.compass-reading {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.06em;
+}
+
+.compass-arrow {
+  display: inline-block;
+  color: var(--mint);
+  font-family: var(--display);
+  font-size: 18px;
+  line-height: 1;
+  text-shadow: 0 0 11px rgb(165 214 198 / 56%);
+  transition: transform 180ms ease-out;
+}
+
+.compass-distance {
+  color: rgb(240 235 221 / 55%);
+  font-family: var(--mono);
+  font-size: 8px;
+}
+
 .lives {
   color: #efb6a7;
   font-size: 17px;
@@ -793,6 +823,18 @@ h2 > span {
     min-width: 91px;
   }
 
+  .compass-card {
+    min-width: 112px;
+  }
+
+  .compass-reading {
+    font-size: 7px;
+  }
+
+  .compass-arrow {
+    font-size: 16px;
+  }
+
   .lives {
     font-size: 14px;
     letter-spacing: 2px;
@@ -836,6 +878,8 @@ h2 > span {
   .hud {
     left: 9px;
     gap: 5px;
+    width: calc(100% - 18px);
+    flex-wrap: wrap;
   }
 
   .hud-card {
@@ -849,6 +893,10 @@ h2 > span {
 
   .life-card {
     min-width: 82px;
+  }
+
+  .compass-card {
+    min-width: 104px;
   }
 
   .hint {

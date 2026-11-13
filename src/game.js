@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { SHARD_TOTAL } from "./constants.js";
 import { GameState } from "./game-state.js";
+import { getCompassBearing, getCompassTarget } from "./compass.js";
 import { Player } from "./player.js";
 import { animateWorld, createWorld } from "./world.js";
 
@@ -44,6 +45,10 @@ export class Game {
       shardCount: document.querySelector("#shard-count"),
       shardMeterFill: document.querySelector("#shard-meter-fill"),
       lives: document.querySelector("#lives"),
+      compass: document.querySelector("#compass"),
+      compassArrow: document.querySelector("#compass-arrow"),
+      compassLabel: document.querySelector("#compass-label"),
+      compassDistance: document.querySelector("#compass-distance"),
       hint: document.querySelector("#hint"),
       soundToggle: document.querySelector("#sound-toggle"),
       dashButton: document.querySelector("#dash-button"),
@@ -86,6 +91,7 @@ export class Game {
     this.world = createWorld(this.scene);
     this.player = new Player(this.scene);
     this.resize();
+    this.updateHud();
     this.bindEvents();
     this.tick = this.tick.bind(this);
     this.requestFrame = window.requestAnimationFrame(this.tick);
@@ -305,6 +311,31 @@ export class Game {
     )}`.trim();
     this.elements.lives.setAttribute("aria-label", `${this.state.lives} of 3 lives remaining`);
     this.root.classList.toggle("all-shards-found", this.hasAllShards);
+    this.updateCompass();
+  }
+
+  updateCompass() {
+    const { position, label } = getCompassTarget(
+      this.world.shards,
+      this.world.home.group.position,
+      this.player.position,
+      this.hasAllShards,
+    );
+    const bearing = getCompassBearing(position, this.player.position, this.camera);
+    const distance = Math.round(Math.hypot(
+      position.x - this.player.position.x,
+      position.z - this.player.position.z,
+    ));
+
+    this.elements.compassArrow.style.transform = `rotate(${bearing}deg)`;
+    this.elements.compassLabel.textContent = label;
+    this.elements.compassDistance.textContent = `${distance} m away`;
+    this.elements.compass.setAttribute(
+      "aria-label",
+      label === "NEAREST LIGHT"
+        ? "Compass points to the nearest uncollected light"
+        : "Compass points to the home beacon",
+    );
   }
 
   updateCamera(delta) {
